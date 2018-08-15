@@ -5,7 +5,7 @@ import org.apache.spark.SparkConf
 
 object SparkStreamingDemo1 {
   def main(args: Array[String]): Unit ={
-    val sparkConf = new SparkConf().setAppName("HDFSWordCount").setMaster("local[2]")
+    val sparkConf = new SparkConf().setAppName("StreamingDemo2").setMaster("local[2]")
 
     //create the streaming context
     val  ssc = new StreamingContext(sparkConf, Seconds(10))

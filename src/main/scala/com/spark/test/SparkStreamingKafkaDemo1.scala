@@ -9,7 +9,10 @@ import org.apache.spark.streaming.{Seconds, StreamingContext}
 import org.apache.spark.streaming.kafka010.LocationStrategies.PreferConsistent
 import kafka.serializer.StringDecoder
 import org.apache.kafka.common.serialization.StringDeserializer
+import org.apache.spark.rdd.RDD
 import org.apache.spark.streaming.kafka010.ConsumerStrategies.Subscribe
+
+import scala.collection.mutable
 object SparkStreamingKafkaDemo1 {
   Logger.getRootLogger.setLevel(Level.ERROR)
   def main(args: Array[String]): Unit = {
@@ -44,12 +47,21 @@ object SparkStreamingKafkaDemo1 {
       ssc,
       PreferConsistent,
       Subscribe[String, String](topicsSet, kafkaParams)
-    )
+    ).map(record => (record.value))
+    stream.count().print()
 
-    val lines=stream.map(record => (record.key, record.value))
-    lines.print()
+    stream.map(line=>{
+      (line.split("\\t")(0),1)
+    }).reduceByKey(_+_).transform(rdd=>{
+      rdd.map(status_pv=>(status_pv._2,status_pv._1)).sortByKey().map(status_pv=>
+        (status_pv._2,status_pv._1))
+    }).print()
+
+
+   // lines.print()
 
     ssc.start()
     ssc.awaitTermination()
   }
 }
+

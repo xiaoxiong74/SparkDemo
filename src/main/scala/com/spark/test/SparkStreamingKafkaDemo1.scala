@@ -21,7 +21,7 @@ object SparkStreamingKafkaDemo1 {
       .set("spark.serializer", "org.apache.spark.serializer.KryoSerializer")
 
     // 创建StreamingContext对象
-    val ssc = new StreamingContext(conf, Seconds(2))
+    val ssc = new StreamingContext(conf, Seconds(3))
 
     //    val zkServers = "master:2181,slave1:2181,slave2:2181"
     // 注意：需要在本机的hosts文件中添加 master/slave1/slave2对应的ip

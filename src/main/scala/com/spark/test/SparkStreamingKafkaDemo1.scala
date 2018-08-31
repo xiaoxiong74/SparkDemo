@@ -28,7 +28,7 @@ object SparkStreamingKafkaDemo1 {
 
     //    val zkServers = "master:2181,slave1:2181,slave2:2181"
     // 注意：需要在本机的hosts文件中添加 master/slave1/slave2对应的ip
-    val brokers = "node1.hde.h3c.com:6667,node2.hde.h3c.com:6667,node3.hde.h3c.com:6667"
+    val brokers = "node3.hde.h3c.com:6667,node4.hde.h3c.com:6667,node5.hde.h3c.com:6667"
 
     val topics = "hszalog"
     val groupId = "consumer_001"

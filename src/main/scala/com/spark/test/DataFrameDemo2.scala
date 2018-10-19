@@ -17,7 +17,7 @@ object DataFrameDemo2 {
     val conf=new SparkConf().setAppName("DataFrameTest2").setMaster("local[1]")
     val sc=new SparkContext(conf)
     val sqlContext= new SQLContext(sc)
-    val df=sqlContext.read.json("hdfs://node1.hde.h3c.com:8020/user/data/people1.json")
+    val df=sqlContext.read.json("hdfs://node1.hde.h3c.com:8020/user/kf7899/people.json")
 
     df.registerTempTable("people")
     //df.createTempView("people")

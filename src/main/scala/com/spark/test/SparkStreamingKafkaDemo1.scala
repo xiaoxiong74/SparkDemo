@@ -28,10 +28,10 @@ object SparkStreamingKafkaDemo1 {
 
     //    val zkServers = "master:2181,slave1:2181,slave2:2181"
     // 注意：需要在本机的hosts文件中添加 master/slave1/slave2对应的ip
-    val brokers = "node3.hde.h3c.com:6667,node4.hde.h3c.com:6667,node5.hde.h3c.com:6667"
+    val brokers = "node1.hde.h3c.com:6667,node2.hde.h3c.com:6667,node3.hde.h3c.com:6667"
 
     val topics = "hszalog"
-    val groupId = "consumer_001"
+    val groupId = "consumer_002"
 
     val topicsSet = topics.split(",").toSet
     val kafkaParams = Map[String, Object](
@@ -47,15 +47,18 @@ object SparkStreamingKafkaDemo1 {
       ssc,
       PreferConsistent,
       Subscribe[String, String](topicsSet, kafkaParams)
-    ).map(record => (record.value))
-    stream.count().print()
-
-    stream.map(line=>{
+    )//.map(record => (record.value))
+    stream.print()
+/*    val lines=stream.map(_.value)
+    val words = lines.flatMap(_.split("\\t"))
+    //stream.count().print()
+    words.print()*/
+/*    stream.map(line=>{
       (line.split("\\t")(0),1)
     }).reduceByKey(_+_).transform(rdd=>{
       rdd.map(status_pv=>(status_pv._2,status_pv._1)).sortByKey().map(status_pv=>
         (status_pv._2,status_pv._1))
-    }).print()
+    }).print()*/
 
 
    // lines.print()

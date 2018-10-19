@@ -6,19 +6,17 @@ import org.apache.log4j.Level
 import org.apache.log4j.Logger
 
 //通过DataFrame的API来操作数据
-/*  people1.json*/
-/*{"id":1, "name":"Ganymede", "age":32}*/
-/*{"id":2, "name":"Lilei", "age":19}*/
-/*{"id":3, "name":"Lily", "age":25}*/
-/*{"id":4, "name":"Hanmeimei", "age":25}*/
-/*{"id":5, "name":"Lucy", "age":37}*/
-/*{"id":6, "name":"Tom", "age":27}*/
-/*
-*/
+
 //ctrl+shift+/添加注释，则ctrl+shift+/取消注释
 
 object DataFrameDemo1 {
-  def main(args:Array[String]): Unit ={
+  def main(args:Array[String]): Unit ={/*  people1.json
+{"id":1, "name":"Ganymede", "age":32}
+{"id":2, "name":"Lilei", "age":19}
+{"id":3, "name":"Lily", "age":25}
+{"id":4, "name":"Hanmeimei", "age":25}
+{"id":5, "name":"Lucy", "age":37}
+{"id":6, "name":"Tom", "age":27}*/
     //控制日志显示级别
     Logger.getLogger("org").setLevel(Level.ERROR)
 
@@ -26,7 +24,7 @@ object DataFrameDemo1 {
     val conf=new SparkConf().setAppName("DataFrameTest1").setMaster("local[1]")
     val sc=new SparkContext(conf)
     val sqlContext= new SQLContext(sc)
-    val df=sqlContext.read.json("hdfs://node1.hde.h3c.com:8020/user/data/people1.json")
+    val df=sqlContext.read.json("hdfs://node1.hde.h3c.com:8020/user/kf7899/people.json")
     
     //查看df中的数据
     df.show()

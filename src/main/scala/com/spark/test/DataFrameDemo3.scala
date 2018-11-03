@@ -27,7 +27,7 @@ object DataFrameDemo3 {
     val conf = new SparkConf().setAppName("DataFrameTest3").setMaster("local[1]")
     val sc = new SparkContext(conf)
     val sqlContext = new SQLContext(sc)
-    val people = sc.textFile("hdfs://node1.hde.h3c.com:8020/user/data/people1.txt")
+    val people = sc.textFile("hdfs://node1.hde.h3c.com:8020/user/kf7899/people.txt")
 
 //方法一  通过字段反射来映射注册临时表
 /*

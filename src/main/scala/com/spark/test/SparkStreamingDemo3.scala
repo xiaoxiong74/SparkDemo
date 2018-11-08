@@ -18,14 +18,9 @@ object SparkStreamingDemo3 {
      */
     val lines = ssc.textFileStream("hdfs://node1.hde.h3c.com:8020/user/kf7899/spark/streaming")
 
-    /*
-     * 下面是统计各项指标，调试时可以只进行部分统计，方便观察结果
-     */
-
-
+    //下面是统计各项指标，调试时可以只进行部分统计，方便观察结果
     // 1. 总PV
     lines.count().print()
-
 
     // 2. 各IP的PV，按PV倒序
     //   空格分隔的第一个字段就是IP
@@ -34,7 +29,6 @@ object SparkStreamingDemo3 {
         sortByKey(false).
         map(ip_pv => (ip_pv._2, ip_pv._1))
     }).print()
-
 
     // 3. 搜索引擎PV
     val refer = lines.map(_.split("\"")(3))
